@@ -1,6 +1,6 @@
 # About:
 
-[Docker](http://www.docker.com/) image based on [debian:jessie](https://hub.docker.com/_/debian/)
+[Docker](http://www.docker.com/) image based on [openjdk:8-jre-alpine](https://hub.docker.com/_/openjdk/)
 
 [![Docker Stars](https://img.shields.io/docker/stars/cerebello/kafka.svg)](https://hub.docker.com/r/cerebello/kafka/) [![Docker Pulls](https://img.shields.io/docker/pulls/cerebello/kafka.svg)](https://hub.docker.com/r/cerebello/kafka/) [![](https://images.microbadger.com/badges/image/cerebello/kafka.svg)](https://microbadger.com/images/cerebello/kafka)
 
@@ -25,5 +25,5 @@
 ## Running Mode:
 
 ```
-$ docker run -d -p 9092:9092 cerebello/kafka
+$ docker run -p 9092:9092 cerebello/kafka:0.10.2.1
 ```

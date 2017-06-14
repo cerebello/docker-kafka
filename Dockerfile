@@ -25,10 +25,9 @@ ARG KAFKA_USER=kafka
 ARG KAFKA_GROUP=kafka
 ARG KAFKA_UID=6000
 ARG KAFKA_GID=6000
-RUN groupadd --gid=${KAFKA_GID} ${KAFKA_GROUP}
-RUN useradd --uid=${KAFKA_UID} --gid=${KAFKA_GID} --no-create-home ${KAFKA_USER}
-RUN addgroup ${KAFKA_USER} ${ZK_USER}
-
+RUN addgroup -g ${KAFKA_GID} -S ${KAFKA_GROUP}
+RUN adduser -u ${KAFKA_UID} -D -S -G ${KAFKA_USER} ${KAFKA_GROUP}
+RUN usermod -a -G ${ZK_GROUP} ${KAFKA_USER}
 
 ##########################################
 ### KAFKA CONFIGRUATION
