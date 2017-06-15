@@ -25,6 +25,10 @@ ARG KAFKA_USER=kafka
 ARG KAFKA_GROUP=kafka
 ARG KAFKA_UID=6000
 ARG KAFKA_GID=6000
+ENV KAFKA_USER=${KAFKA_USER}
+ENV KAFKA_GROUP=${KAFKA_GROUP}
+ENV KAFKA_UID=${KAFKA_UID}
+ENV KAFKA_GID=${KAFKA_GID}
 RUN addgroup -g ${KAFKA_GID} -S ${KAFKA_GROUP}
 RUN adduser -u ${KAFKA_UID} -D -S -G ${KAFKA_USER} ${KAFKA_GROUP}
 RUN usermod -a -G ${ZK_GROUP} ${KAFKA_USER}
@@ -62,17 +66,17 @@ ENV KAFKA_ZK_CONN_TIMEOUT_MS=6000
 ##########################################
 ### DIRECTORIES
 ##########################################
-RUN mkdir -p ${KAFKA_HOME}
-RUN mkdir -p ${KAFKA_DATA_DIR}
+RUN mkdir -p ${KAFKA_HOME} && \
+    mkdir -p ${KAFKA_DATA_DIR}
 
 ##########################################
 ### DOWNLOAD AND INSTALL ZOOKEEPER
 ##########################################
-RUN wget ${KAFKA_MIRROR}/${KAFKA_VERSION}/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz \
-  && tar -xvf kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz -C ${KAFKA_HOME} --strip=1 \
-  && rm -rf kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz
-RUN chown -R ${KAFKA_USER}:${KAFKA_GROUP} ${KAFKA_DATA_DIR}
-RUN chown -R ${KAFKA_USER}:${KAFKA_GROUP} ${KAFKA_HOME}
+RUN wget ${KAFKA_MIRROR}/${KAFKA_VERSION}/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz && \
+    tar -xvf kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz -C ${KAFKA_HOME} --strip=1 && \
+    rm -rf kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz && \
+    chown -R ${KAFKA_USER}:${KAFKA_GROUP} ${KAFKA_DATA_DIR} && \
+    chown -R ${KAFKA_USER}:${KAFKA_GROUP} ${KAFKA_HOME}
 
 ##########################################
 ### START SCRIPT
