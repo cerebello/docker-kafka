@@ -36,6 +36,8 @@ echo "log.retention.hours=${KAFKA_LOG_RETENTION_HOURS}" >> ${KAFKA_HOME}/config/
 echo "log.segment.bytes=${KAFKA_SEGMENT_BYTES}" >> ${KAFKA_HOME}/config/server.properties
 echo "log.retention.check.interval.ms=${KAFKA_RETENTION_CHECK_MS}" >> ${KAFKA_HOME}/config/server.properties
 echo "zookeeper.connection.timeout.ms=${KAFKA_ZK_CONN_TIMEOUT_MS}" >> ${KAFKA_HOME}/config/server.properties
+echo "advertised.host.name=0.0.0.0" >> ${KAFKA_HOME}/config/server.properties
+echo "advertised.port=${ADVERTISED_PORT:-9092}" >> ${KAFKA_HOME}/config/server.properties
 
 ##########################################
 ### ZOOKEEPER SERVERS
